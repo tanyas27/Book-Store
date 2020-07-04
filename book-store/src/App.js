@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import './App.css';
-import Cover from './components/Cover';
+
+import Dashboard from './components/Dashboard/Dashboard'
+import Cover from './components/Cover/Cover';
+import { Route } from 'react-router';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Cover/>
+        <Route path="/dashboard" component={Dashboard} />
+        <Route path="/" exact component={Cover} />
       </div>
     );
   }

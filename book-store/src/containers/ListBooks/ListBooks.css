@@ -1,0 +1,11 @@
+.listBooks ol li{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    justify-content: start;
+}
+
+.listBooks .title{
+    border-bottom: 2px solid #f0bf1e;
+}
