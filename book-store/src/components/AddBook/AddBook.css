@@ -1,3 +1,9 @@
 .addBook{
     max-width: 30rem;
+    margin: auto;
+    width: 100%;
+}
+
+.addBook label{
+    float: left;
 }

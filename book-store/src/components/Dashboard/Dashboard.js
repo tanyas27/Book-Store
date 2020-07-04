@@ -1,15 +1,16 @@
 import React from 'react';
 import ListBooks from '../../containers/ListBooks/ListBooks';
 import AddBook from '../AddBook/AddBook';
+import UpdateBook from '../../containers/UpdateBook/UpdateBook';
 import {NavLink, Route} from 'react-router-dom';
 import './Dashboard.css';
 
 
 const dashboard = () => (
-  <div className="dasboard">
+  <div className="dashboard">
+  <header> <h1>Book Store <img alt ="logo" src={require ('../../assets/images/book-store-icon.png')}/></h1></header>
+  <br/>
   <div className="container-fluid">
-    <h1>Book Home</h1>
-    <hr/>
     <div className="row content">
     <div className="col-sm-2 sidenav">
       <h3>Dashboard</h3>
@@ -29,6 +30,7 @@ const dashboard = () => (
 
     <div className="col-sm-10">
       <Route path="/dashboard/addBook" component={AddBook}/>
+      <Route path="/dashboard/editBook" component={UpdateBook}/>
       <Route path="/dashboard/listBooks" component={ListBooks}/>
     </div>
   </div>

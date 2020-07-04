@@ -6,29 +6,46 @@ import './ListBooks.css';
 class ListBooks extends Component {
     state = {
        books: {},
-       size: 0
+       listLength: 0
     }
     componentDidMount(){
         const books= JSON.parse(localStorage.getItem("books") || "{}");
-        let size = Object.keys(books).length;
-        this.setState({books: books, size: size});
+        const listLength = JSON.parse(localStorage.getItem("listLength"));
+        this.setState({books: books, listLength: listLength});
     }
 
-    onDeleteHandler = (title) => {
+    onEditHandler = (id) => {
+        const queryParams = [];
+        const currentBook = this.state.books[id];
+       
+        for(let i in currentBook){
+            queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(currentBook[i]));
+        }
+    
+        const queryString = queryParams.join('&');
+        this.props.history.push({
+            pathname:'/dashboard/editBook',
+            search: '?'+queryString
+        });
+    } 
+
+    onDeleteHandler = (id) => {
         const updatedBooks = this.state.books;
-        delete updatedBooks[title] ;
+        delete updatedBooks[id] ;
         this.setState({books: updatedBooks})
         localStorage.setItem("books", JSON.stringify(updatedBooks));
     }
 
     render(){
-        let books = "No Books Yet";
-        if(this.state.size) {
+        let books = <h2>Oh ho! No Books Yet</h2>;
+        if(this.state.listLength) {
             books= Object.keys(this.state.books).map( book => 
-            <Book key={this.state.books[book].title} title={this.state.books[book].title}
-             author={this.state.books[book].author} date={this.state.books[book].date} delete={() => this.onDeleteHandler(this.state.books[book].title)}/>)
+            <Book key={this.state.books[book].id} title={this.state.books[book].title}
+             author={this.state.books[book].author} date={this.state.books[book].date} 
+             edit= {() => this.onEditHandler(this.state.books[book].id)}
+             delete={() => this.onDeleteHandler(this.state.books[book].id)}/>)
         }
-        
+
         return(
             <div className="listBooks">
                 <ol>
