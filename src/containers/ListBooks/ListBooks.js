@@ -22,7 +22,6 @@ class ListBooks extends Component {
     onEditHandler = (id) => {
         const queryParams = [];
         const currentBook = this.state.books.find(item => item.id === id);
-        console.log(currentBook);
         for(let i in currentBook){
             queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(currentBook[i]));
         }
@@ -44,20 +43,19 @@ class ListBooks extends Component {
       const keyword = this.state.searchFor;
       const searchedBooks = this.state.books.filter((book) => 
       (book.title.toLowerCase() === keyword.toLowerCase()) || (book.author.toLowerCase() === keyword.toLowerCase()) );
-      console.log(searchedBooks);
       this.setState({books: searchedBooks});
     }
 
     sortHandler = (by) => {
        let sortedBooks = [...this.state.books];
-       sortedBooks.sort((a,b) => ((a[by] > b[by] ? 1 : -1)));
+       sortedBooks.sort((a,b) => ((a[by].toLowerCase() > b[by].toLowerCase() ? 1 : -1)));
        this.setState({books: sortedBooks});
     }
 
     render(){
         const menuClass = `dropdown-menu${this.state.dropdownOpen ? " show" : ""}`;
         let books = <h2>Oh Snap! No Books Yet</h2>;
-        if(this.state.listLength) {
+        if(this.state.books) {
             books= (this.state.books).map( book => 
             <Book key={book.id} title={book.title}
              author={book.author} date={book.date} 

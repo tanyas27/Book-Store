@@ -14,7 +14,12 @@ class UpdateBook extends Component {
         const query = new URLSearchParams(this.props.location.search);
         const book={};
         for(let param of query.entries()){
-          book[param[0]] = param[1];
+          if(param[0] === "id"){
+            book[param[0]] = +param[1];
+          }
+          else{
+            book[param[0]] = param[1];
+          }        
         }
         this.setState({book : book});
     }
@@ -27,9 +32,10 @@ class UpdateBook extends Component {
      
     handleFormSubmit = () => {
         const { books, book } = this.state;
-        books[book.id] = book;
+        const index = books.findIndex((item) => item.id === book.id);
+        books[index] = {...book};
         localStorage.setItem("books", JSON.stringify(books));
-        this.props.history.push('/dashboard/listBooks')
+        this.props.history.push('/dashboard/listBooks');
     };
 
     componentDidMount(){
