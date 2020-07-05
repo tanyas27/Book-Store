@@ -6,6 +6,7 @@ import './ListBooks.css';
 class ListBooks extends Component {
     state = {
       books: null,
+      searchedBooks: null,
       listLength: 0,
       dropdownOpen: false,
       searchFor: ""
@@ -18,7 +19,7 @@ class ListBooks extends Component {
         const listLength = JSON.parse(localStorage.getItem("listLength"));
         this.setState({books: books, listLength: listLength});
     }
-
+    
     onEditHandler = (id) => {
         const queryParams = [];
         const currentBook = this.state.books.find(item => item.id === id);
@@ -43,7 +44,7 @@ class ListBooks extends Component {
       const keyword = this.state.searchFor;
       const searchedBooks = this.state.books.filter((book) => 
       (book.title.toLowerCase() === keyword.toLowerCase()) || (book.author.toLowerCase() === keyword.toLowerCase()) );
-      this.setState({books: searchedBooks});
+      this.setState({searchedBooks: searchedBooks});
     }
 
     sortHandler = (by) => {
@@ -55,7 +56,14 @@ class ListBooks extends Component {
     render(){
         const menuClass = `dropdown-menu${this.state.dropdownOpen ? " show" : ""}`;
         let books = <h2>Oh Snap! No Books Yet</h2>;
-        if(this.state.books) {
+        if(this.state.searchedBooks){
+          books= (this.state.searchedBooks).map( book => 
+            <Book key={book.id} title={book.title}
+             author={book.author} date={book.date} 
+             edit= {() => this.onEditHandler(book.id)}
+             delete={() => this.onDeleteHandler(book.id)}/>)
+        }
+        else if(this.state.books) {
             books= (this.state.books).map( book => 
             <Book key={book.id} title={book.title}
              author={book.author} date={book.date} 
