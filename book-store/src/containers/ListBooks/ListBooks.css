@@ -1,11 +1,16 @@
 .listBooks ol li{
     display: flex;
     flex-direction: row;
-    align-items: center;
     border-bottom: 1px solid #ccc;
-    justify-content: start;
+    text-align: left;
 }
 
 .listBooks .title{
     border-bottom: 2px solid #f0bf1e;
+    font-weight: bold;
+}
+
+.listBooks h2{
+    margin-top: 20px;
+    color: #B1D415;
 }

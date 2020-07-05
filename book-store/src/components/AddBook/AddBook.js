@@ -12,7 +12,7 @@ class AddBook extends Component {
             author: "",
             date: null
         },
-        listLength : null
+        listLength : 0
     };
 
     inputChangeHandler = (event, type) => {
@@ -28,16 +28,18 @@ class AddBook extends Component {
         var mm = today.getMonth();  
         var yyyy = today.getFullYear(); 
         book.date = dd + " " + monthNames[mm] + " " + yyyy; 
-        book.id = ++this.state.listLength;
-        books[book.id] = book;
+        let listL =  this.state.listLength +1;
+        this.setState({listLength: listL});
+        book.id = listL;
+        books.push(book);
         localStorage.setItem("books", JSON.stringify(books));
-        localStorage.setItem("listLength", JSON.stringify(book.id));
+        localStorage.setItem("listLength", JSON.stringify(listL));
     };
 
     componentDidMount(){
-        const books= JSON.parse(localStorage.getItem("books") || "{}" );
-        const listLength = JSON.parse(localStorage.getItem("listLength"));
-        this.setState({books: books, listLength: listLength});
+        const books= JSON.parse(localStorage.getItem("books") || "[]" );
+        const listLength = JSON.parse(localStorage.getItem("listLength") || "0");
+        this.setState({books: books, listLength: +listLength});
     }
 
     render(){
@@ -48,11 +50,11 @@ class AddBook extends Component {
               <form onSubmit={this.handleFormSubmit}>
                 <div className="form-group">
                 <label htmlFor="title">Title of the Book</label>
-                <input className="form-control" id="title" onChange={(event) => (this.inputChangeHandler(event,"title"))} type="text" placeholder="e.g Harry Potter and the Deathly Hallows"/>
+                <input className="form-control" id="title" onChange={(event) => (this.inputChangeHandler(event,"title"))} type="text" placeholder="e.g Harry Potter and the Deathly Hallows"required/>
                 </div>
                 <div className="form-group">
                 <label htmlFor="author">Author</label>
-                <input className="form-control" id="author" onChange={(event) => (this.inputChangeHandler(event,"author"))} type="text" placeholder="e.g J K Rowling" />
+                <input className="form-control" id="author" onChange={(event) => (this.inputChangeHandler(event,"author"))} type="text" placeholder="e.g J K Rowling" required/>
                 </div>
                 <button type="submit" className="btn btn-success">Add Book</button>
               </form>

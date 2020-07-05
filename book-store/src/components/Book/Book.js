@@ -7,8 +7,8 @@ const book = (props) => (
       <p className="col col-md-5">{props.title}</p>   
       <p className="col col-md-2">{props.author}</p>
       <p className="col col-md-2">{props.date}</p>
-      <button className="btn btn-info" onClick={props.edit}>Edit</button>
-      <button className="btn btn-Light" onClick={props.delete}>Delete</button>
+      <button className="btn btn-info" onClick={props.edit}>Edit</button> &nbsp;
+      <button className="btn btn-danger" onClick={props.delete}>Delete</button>
     </li>
 );
 

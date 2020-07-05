@@ -13,19 +13,11 @@ const dashboard = () => (
   <div className="container-fluid">
     <div className="row content">
     <div className="col-sm-2 sidenav">
-      <h3>Dashboard</h3>
+      <h2>Dashboard</h2>
       <ul className="nav nav-pills nav-stacked">
         <li className="btn btn-Light"><NavLink to="/dashboard/addBook">Add New Book</NavLink></li>
-        <li className="btn btn-Light"><NavLink to="/dashboard/listBooks">List Books</NavLink></li>
+        <li className="btn btn-Light"><a href="/dashboard/listBooks">List Books</a></li>
       </ul><br/>
-      <div className="input-group">
-        <input type="text" className="form-control" placeholder="Search Store.."/>
-        <span className="input-group-btn">
-          <button className="btn btn-success" type="button">
-            Go
-          </button>
-        </span>
-      </div>
     </div>
 
     <div className="col-sm-10">
@@ -36,7 +28,7 @@ const dashboard = () => (
   </div>
 </div>
 <footer className="container-fluid">
-  <p>Footer Text</p>
+  <p>Copyright &copy; Tanya</p>
 </footer>
 </div>
 );

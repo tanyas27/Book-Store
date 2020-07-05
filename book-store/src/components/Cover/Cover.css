@@ -30,9 +30,10 @@
 
 .cover a{
  /* background-image: linear-gradient(to left, #f5c104, #FD6000); */
- background-color: rgba(74, 143, 10, 0.7) ;
+ background-color: rgba(182, 141, 6, 0.7) ;
  width: 200px;
  height: 45px;
+ color: #fff;
  border-radius: 0.575em;
  text-shadow: none;
  text-decoration: none;

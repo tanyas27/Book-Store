@@ -15,7 +15,6 @@ class UpdateBook extends Component {
         const book={};
         for(let param of query.entries()){
           book[param[0]] = param[1];
-          console.log(param);
         }
         this.setState({book : book});
     }
@@ -45,11 +44,11 @@ class UpdateBook extends Component {
               <form onSubmit={this.handleFormSubmit}>
                 <div className="form-group">
                 <label htmlFor="title">Title of the Book</label>
-                <input className="form-control" id="title" value={this.state.book.title} onChange={(event) => (this.inputChangeHandler(event,"title"))} type="text" placeholder="..."/>
+                <input className="form-control" id="title" value={this.state.book.title} onChange={(event) => (this.inputChangeHandler(event,"title"))} type="text" placeholder="..." required/>
                 </div>
                 <div className="form-group">
                 <label htmlFor="author">Author</label>
-                <input className="form-control" id="author" value={this.state.book.author} onChange={(event) => (this.inputChangeHandler(event,"author"))} type="text" placeholder="..." />
+                <input className="form-control" id="author" value={this.state.book.author} onChange={(event) => (this.inputChangeHandler(event,"author"))} type="text" placeholder="..." required/>
                 </div>
                 <button type="submit" className="btn btn-success">Update Book</button>
               </form>
